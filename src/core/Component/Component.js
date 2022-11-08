@@ -8,6 +8,7 @@ export class Component extends HTMLElement {
     setState(callback) {
         this.state = callback(this.state);
         this.innerHTML = this.render()
+            .toString()
             .trim()
             .replaceAll(/true|false/gi, "")
             .replaceAll(",", "");
@@ -15,6 +16,7 @@ export class Component extends HTMLElement {
 
     connectedCallback() {
         this.innerHTML = this.render()
+            .toString()
             .trim()
             .replaceAll(/true|false/gi, "")
             .replaceAll(",", "");
@@ -26,7 +28,7 @@ export class Component extends HTMLElement {
         this.componentWillUnMount();
     }
 
-    attributeChangeCallback(name, oldValue, newValue) {
+    attributeChangedCallback(name, oldValue, newValue) {
         this.componentWillUpdate(name, oldValue, newValue);
         this.getAttributeNames().forEach(() => {
             this.props[name] = this.getAttribute(name);
