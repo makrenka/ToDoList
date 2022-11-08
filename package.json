@@ -45,6 +45,8 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "dotenv-webpack": "^8.0.1",
+    "firebase": "^9.13.0",
     "normalize.css": "^8.0.1"
   }
 }
