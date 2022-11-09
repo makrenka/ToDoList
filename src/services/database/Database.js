@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, collection, deleteDoc, doc, getDocs, getFireStore, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from 'firebase/firestore';
 import { API_KEY } from "../../constants/envValues";
 
 export class Database {
@@ -15,7 +15,7 @@ export class Database {
         };
 
         const app = initializeApp(firebaseConfig);
-        this._database = getFireStore(app);
+        this._database = getFirestore(app);
     }
 
     create(collectionKey, body) {
