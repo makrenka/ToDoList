@@ -26,7 +26,7 @@ export class Database {
     read(collectionKey) {
         const collectionRef = collection(this._database, collectionKey);
         return getDocs(collectionRef).then((documents) => {
-            return documents.docs.map((doc) => ({...doc.data(), id: doc.id}))
+            return documents.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         });
     }
 
@@ -36,7 +36,7 @@ export class Database {
     }
 
     delete(collectionKey, id) {
-        const document = doc(this._database, collectionKey, id); 
+        const document = doc(this._database, collectionKey, id);
         return deleteDoc(document);
     }
 
