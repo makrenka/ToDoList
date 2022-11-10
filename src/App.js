@@ -40,7 +40,7 @@ export class App extends Component {
         <div class='container mt-5'>
             <div class="input-group mb-3">
             <input value='${this.state.value}' type="text" class="form-control" placeholder="Add a new task" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-primary" type="button" id="button-addon2">save</button>
+            <my-button content="save" classname="btn btn-outline-primary"></my-button>
             </div>
             <ul class="list-group">
             <li class="list-group-item">
