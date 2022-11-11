@@ -24,10 +24,10 @@ export class App extends Component {
             }
         });
 
-        window.addEventListener("save-task", () => {
-            this.setState(() => ({ ...state, isLoading: true }));
-            todoList.createTask({ title: this.state.value }).finaly(() => {
-                this.setState(() => ({ ...state, isLoading: false }))
+        window.addEventListener("save-task", () => {            
+            this.setState((state) => ({ ...state, isLoading: true }));
+            todoList.createTask({ title: this.state.value }).finally(() => {
+                this.setState((state) => ({ ...state, isLoading: false }))
             })
         })
     }
