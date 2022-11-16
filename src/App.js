@@ -1,5 +1,6 @@
 import { Component } from './core';
-import './components/Button/Button';
+import './components/atoms/Button/Button';
+import './components/atoms/Input/Input';
 import { todoList } from './services/todoList/TodoList';
 
 export class App extends Component {
@@ -39,7 +40,7 @@ export class App extends Component {
         
         <div class='container mt-5'>
             <div class="input-group mb-3">
-                <input value='${this.state.value}' type="text" class="form-control" placeholder="Add a new task" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <my-input type="text" placeholder="Add a new task"><my-input>
                 <my-button eventtype="save-task" content="Save" classname="btn btn-outline-primary"></my-button>
             </div>
             <ul class="list-group">
