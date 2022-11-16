@@ -36,24 +36,7 @@ export class App extends Component {
 
     render() {
         return `
-        ${this.state.isLoading && (
-            `
-                <div class="d-flex justify-content-center position-absolute" style="z-index: 1;
-                position: fixed;
-                background: #000;
-                opacity: .5;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                display: flex;
-                align-items: center;">
-                    <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
-            `
-        )}
+        
         <div class='container mt-5'>
             <div class="input-group mb-3">
                 <input value='${this.state.value}' type="text" class="form-control" placeholder="Add a new task" aria-label="Recipient's username" aria-describedby="button-addon2">
