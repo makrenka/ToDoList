@@ -1,4 +1,5 @@
 import { Component } from "../../../core";
+import { todoList } from "../../../services/todoList/TodoList";
 import '../../atoms/Button/Button';
 import '../../atoms/Input/Input';
 
@@ -11,7 +12,12 @@ export class InputGroup extends Component {
     }
 
     onSave() {
-
+        if (this.state.inputValue) {
+            todoList.createTask({
+                title: this.state.inputValue,
+                isCompleted: false,
+            })
+        }
     }
 
     onInput(evt) {
