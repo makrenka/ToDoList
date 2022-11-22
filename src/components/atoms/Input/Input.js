@@ -31,7 +31,7 @@ export class Input extends Component {
     }
 
     componentDidMount() {
-        this.addEventListener('input', debounce(this.onInput, 1000));
+        this.addEventListener('change', this.onInput);
     }
 
     render() {
