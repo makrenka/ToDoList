@@ -1,69 +1,36 @@
 import { Component } from "../../../core";
-import { todoList } from "../../../services/todoList/TodoList";
-import '../../atoms/Button/Button';
-import '../../atoms/Input/Input';
 
 export class InputGroup extends Component {
-    constructor() {
-        super();
-        this.state = {
-            inputValue: '',
-            isLoading: false,
-            error: '',
-        }
-    }
-
-    onSave() {
-        if (this.state.inputValue) {
-            this.setState((state) => {
-                return {
-                    ...state,
-                    isLoading: true,
-                }
-            })
-            todoList.createTask({
-                title: this.state.inputValue,
-                isCompleted: false,
-            }).then(() => {
-                this.setState((state) => {
-                    return {
-                        ...state,
-                        inputValue: '',
-                    }
-                })
-            }).catch(() => {
-                throw new Error('Server is not available');
-            }).finally(() => {
-                this.setState((state) => {
-                    return {
-                        ...state,
-                        isLoading: false,
-                    }
-                })
-            });
-        }
-    }
-
-    onInput(evt) {
-        this.setState((state) => {
-            return {
-                ...state,
-                inputValue: evt.detail.value,
-            }
+    
+    onSubmit = (evt) => {
+        evt.preventDefault();
+        const task = {};
+        const data = new FormData(evt.target);
+        data.forEach((value, key) => {
+            task[key] = value;
         })
+        this.dispatch('save-task', task);
     }
 
     componentDidMount() {
-        this.addEventListener('save-task', this.onSave);
-        this.addEventListener('custom-input', this.onInput);
+        this.addEventListener('submit', this.onSubmit);
+    }
+
+    componentWillUnmount() {
+        this.removeEventListener('submit', this.onSubmit);
     }
 
     render() {
         return `
-            <div class="input-group mb-3">
-                <my-input value="${this.state.inputValue}" type="text" placeholder="Add a new task"></my-input>
-                <my-button eventtype="save-task" content="Save" classname="btn btn-outline-primary"></my-button>
-            </div>
+            <form class="input-group mb-3">
+                <input 
+                    name="title"
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Add a new task" 
+                >
+                <button type="submit" class="btn btn-outline-primary">Save</button>
+            </form>
             <div class="spinner-border ${this.state.isLoading ? "open" : "closed"}" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
