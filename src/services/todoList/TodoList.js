@@ -16,6 +16,10 @@ class TodoList {
     deleteTask(id) {
         return this.database.delete('tasks', id);
     }
+
+    updateTask(id, body) {
+        return this.database.update('tasks', id, body);
+    }
 }
 
 export const todoList = new TodoList();

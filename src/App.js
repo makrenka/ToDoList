@@ -37,6 +37,13 @@ export class App extends Component {
             })
     }
 
+    updateTask = ({ detail }) => {
+        todoList.updateTask(detail.id, { title: detail.title, isCompleted: false })
+        .then(() => {
+            this.getTasks();
+        });
+    }
+
     onClick = (evt) => {
         const target = evt.target;
         if (target.closest('.delete-action')) {
@@ -48,11 +55,13 @@ export class App extends Component {
     componentDidMount() {
         this.getTasks();
         this.addEventListener('save-task', this.saveTask);
+        this.addEventListener('edit-task', this.updateTask);
         this.addEventListener('click', this.onClick);
     }
 
     componentWillUnmount() {
         this.removeEventListener('save-task', this.saveTask);
+        this.removeEventListener('edit-task', this.updateTask);
         this.removeEventListener('click', this.onClick);
     }
 
@@ -60,13 +69,17 @@ export class App extends Component {
         return `
         
         <div class='container mt-5'>
-            <my-input-group></my-input-group>            
+            <my-input-group type="save-task"></my-input-group>            
         </div>
 
         <ul class="list-group">
             ${this.state.tasks.map((item) => (
             `
-                    <my-task title="${item.title}" id="${item.id}" iscompleted="${item.iscompleted}"></my-task>
+                    <my-task 
+                        title="${item.title}" 
+                        id="${item.id}" 
+                        iscompleted="${JSON.stringify(item.isCompleted)}"
+                    ></my-task>
                 `
         )).join(' ')}
             
