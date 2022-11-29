@@ -12,6 +12,26 @@ export class Task extends Component {
         return ['title', 'id', 'iscompleted']
     }
 
+    onClick(evt) {
+        const target = evt.target;
+        if(target.closest('.edit-action')) {
+            this.setState((state) => {
+                return {
+                    ...state,
+                    isEditting: true,
+                }
+            })
+        }
+    }
+
+    componentDidMount() {
+        this.addEventListener('click', this.onClick);
+    }
+
+    componentWillUnmount() {
+        this.removeEventListener('click', this.onClick);
+    }
+
     render() {
         return `
         <li class="list-group-item">

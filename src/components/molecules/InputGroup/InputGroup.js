@@ -9,7 +9,7 @@ export class InputGroup extends Component {
         data.forEach((value, key) => {
             task[key] = value;
         })
-        this.dispatch('save-task', task);
+        this.dispatch(this.props.type, task);
     }
 
     componentDidMount() {
@@ -18,6 +18,10 @@ export class InputGroup extends Component {
 
     componentWillUnmount() {
         this.removeEventListener('submit', this.onSubmit);
+    }
+
+    static get observedAttributes() {
+        return ['type']
     }
 
     render() {
