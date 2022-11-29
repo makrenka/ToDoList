@@ -1,7 +1,7 @@
 import { Component } from './core';
 import './components/molecules/InputGroup/InputGroup';
 import { todoList } from './services/todoList/TodoList';
-import { data } from 'autoprefixer';
+import '../src/components/molecules/Task/Task';
 
 export class App extends Component {
     constructor() {
@@ -17,7 +17,7 @@ export class App extends Component {
             this.setState((state) => {
                 return {
                     ...state,
-                    tasks: data.map((item) => ({ ...item, isEditting: false })),
+                    tasks: data,
                 }
             })
         })
@@ -42,22 +42,7 @@ export class App extends Component {
         if (target.closest('.delete-action')) {
             const data = target.dataset;
             this.deleteTask(data.id);
-        };
-        if (target.closest('.edit-action')) {
-            const data = target.dataset;
-            this.setState((state) => {
-                return {
-                    ...state,
-                    tasks: state.tasks.map((item) => {
-                        if(item.id === data.id) {
-                            return { ...item, isEditting: true }
-                        }
-
-                        return item;
-                    })
-                }
-            })
-        }
+        };      
     }
 
     componentDidMount() {
@@ -81,20 +66,7 @@ export class App extends Component {
         <ul class="list-group">
             ${this.state.tasks.map((item) => (
             `
-                    <li class="list-group-item">
-                        <div class="form-check d-flex justify-content-between align-items-center">
-                            <div>
-                                <input class="form-check-input" type="checkbox" ${item.isCompleted ? 'checked' : ''} id="${item.id}">
-                                    <label class="form-check-label" for="${item.id}">
-                                        ${item.title}
-                                    </label>
-                            </div>
-                            <div class='d-flex'>
-                                <button data-id="${item.id}" class="btn btn-danger btn-sm m-2 delete-action">Delete</button>
-                                <button data-id="${item.id}" class="btn btn-primary btn-sm m-2 edit-action">Edit</button>
-                            </div>
-                        </div>
-                    </li>
+                    <my-task title="${item.title}" id="${item.id}" iscompleted="${item.iscompleted}"></my-task>
                 `
         )).join(' ')}
             
